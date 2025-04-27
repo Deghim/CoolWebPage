@@ -8,7 +8,8 @@ export default function Landing() {
         <section className=" relative w-full min-h-screen flex flex-col items-center justify-center">
             <div className="flex items-center space-x-4 gap-2">
                 <p className="text-6xl font-bold ">Hi,</p>
-                <span className="bg-yellow-300 dark:bg-red-600">
+                {/* <span className="bg-yellow-300 dark:bg-red-600"> */}
+                <span >
                     <TypeAnimation
                         sequence={[
                             "user!", 2000,
