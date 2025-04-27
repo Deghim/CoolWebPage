@@ -18,12 +18,13 @@ export default function Landing() {
 
         window.addEventListener("scroll", upddateProgress, { passive: true });
         upddateProgress();
-    });
+
+        return () => window.removeEventListener("scroll", upddateProgress);
+    }, []);
 
     return (
         <>
-
-            <section className="w-full min-h-screen flex items-center justify-center max-h-screen">
+            <section className=" relative w-full min-h-screen flex flex-col items-center justify-center">
                 <div className="flex items-center space-x-4 gap-2">
                     <p className="text-6xl font-bold ">Hi,</p>
                     <span className="bg-yellow-300 dark:bg-red-600">
