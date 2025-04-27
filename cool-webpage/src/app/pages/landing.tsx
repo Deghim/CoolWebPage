@@ -1,6 +1,7 @@
 "use client";
 import { TypeAnimation } from "react-type-animation";
 import { useState, useEffect } from "react";
+import Options from "./options";
 
 export default function Landing() {
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -41,15 +42,9 @@ export default function Landing() {
                         />
                     </span>
                 </div>
-            <div>{scrollProgress}%</div>
+                <div>{scrollProgress}%</div>
             </section>
-            <section className="w-full min-h-screen flex items-center justify-center max-h-screen">
-                <div className="flex items space-x-4 gap-10">
-                    <p className="text-6xl font-bold" >Dev. Exp.</p>
-                    <p className="text-6xl font-bold">User Exp.</p>
-
-                </div>
-            </section>
+            <Options />
         </>
     );
 }
