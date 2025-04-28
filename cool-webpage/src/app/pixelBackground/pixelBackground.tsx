@@ -3,7 +3,7 @@ import { CSSProperties, useEffect, useState, JSX } from "react";
 import { motion } from 'framer-motion';
 
 const anim = {
-    initial: { opacity: 0 },
+    initial: { opacity: 1 },
     open: (i: number) => ({ opacity: 1, transition: { duration: 0, delay: 0.01 * i } }),
     closed: (i: number) => ({ opacity: 0, transition: { duration: 0, delay: 0.01 * i } }),
 };
@@ -64,7 +64,7 @@ export default function PixelBack({ gatillo }: { gatillo: boolean }) {
     const blockStyle: CSSProperties = {
         width: '100%',
         height: '2.5vw',
-        backgroundColor: 'orange',
+        backgroundColor: 'currentColor',
     };
 
     return (

@@ -33,7 +33,7 @@ export default function Home() {
       <Landing />
       <Options opacity={progreView >= 100 ? 100 : 0} />
       <button onClick={() => setGatillo(!gatillo)}> hola mama</button>
-      <PixelBack gatillo={gatillo} />
+      <PixelBack gatillo={!gatillo} />
     </div>
   );
 }
