@@ -2,8 +2,10 @@
 import Landing from "./pages/landing";
 import Options from "./pages/options";
 import { useEffect, useState } from "react";
+import PixelBack from "./pixelBackground/pixelBackground";
 
 export default function Home() {
+  const [gatillo, setGatillo] = useState(false);
   const [progreView, setProgreView] = useState(0);
 
   useEffect(() => {
@@ -30,6 +32,8 @@ export default function Home() {
       </div>
       <Landing />
       <Options opacity={progreView >= 100 ? 100 : 0} />
+      <button onClick={() => setGatillo(!gatillo)}> hola mama</button>
+      <PixelBack gatillo={gatillo} />
     </div>
   );
 }
