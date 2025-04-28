@@ -27,13 +27,13 @@ export default function Home() {
 
   return (
     <div className="relative" >
+      <button onClick={() => setGatillo(!gatillo)}> hola mama</button>
+      <PixelBack gatillo={!gatillo} />
       <div style={{ position: 'fixed', bottom: `${progreView}%` , left: '50%', transform: 'translateX(-50%)', fontSize: '1rem', fontWeight: 'bold', opacity: progreView >= 100 ? 0 : 100, transition: 'opacity 0.5s ease', }}>
         {Math.round(progreView)}%
       </div>
       <Landing />
       <Options opacity={progreView >= 100 ? 100 : 0} />
-      <button onClick={() => setGatillo(!gatillo)}> hola mama</button>
-      <PixelBack gatillo={!gatillo} />
     </div>
   );
 }

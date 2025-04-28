@@ -48,6 +48,7 @@ export default function PixelBack({ gatillo }: { gatillo: boolean }) {
         generateBlocks();
         window.addEventListener('resize', generateBlocks);
         return () => window.removeEventListener('resize', generateBlocks);
+        // ESLint ignore
     }, [gatillo]);
 
     const pixelBackground: CSSProperties = {
