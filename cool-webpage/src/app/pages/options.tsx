@@ -30,7 +30,6 @@ export default function Options({ opacity }: OptionsProps) {
         height: "100%",
         pointerEvents: "none",
         overflow: "visible",
-        transition: "border 0.3s ease, transform 0.3s ease",
     };
 
     return (
@@ -60,15 +59,14 @@ export default function Options({ opacity }: OptionsProps) {
                                 fill: 'none',
                                 stroke: 'currentColor',
                                 strokeWidth: '4',
-                                strokeDasharray: hoverDev ? '20 320' : '400 0',
-                                strokeDashoffset: hoverDev ? 100 : 40,
+                                strokeDasharray: hoverDev ? '400 0' : '20 320',
+                                strokeDashoffset: hoverDev ? 40 : 100,
                                 transition: 'all 1.35s cubic-bezier(0.15, 1, 0.22, 1)'
                             }}
                         />
                     </svg>
                     Dev. Exp.
                 </button>
-
 
                 <button
                     className="text-6xl font-bold"
@@ -89,8 +87,8 @@ export default function Options({ opacity }: OptionsProps) {
                                 fill: 'none',
                                 stroke: 'currentColor',
                                 strokeWidth: '4',
-                                strokeDasharray: hoverUser ? '15, 310' : '400, 0',
-                                strokeDashoffset: hoverUser ? 100 : 40,
+                                strokeDasharray: hoverUser ? '400 0' : '20 320',
+                                strokeDashoffset: hoverUser ? 40 : 100,
                                 transition: 'all 1.35s cubic-bezier(0.19, 1, 0.22, 1)'
                             }}
                         />
