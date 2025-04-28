@@ -29,6 +29,7 @@ export default function Options({ opacity }: OptionsProps) {
         width: "100%",
         height: "100%",
         pointerEvents: "none",
+        overflow: "visible",
         transition: "border 0.3s ease, transform 0.3s ease",
     };
 
@@ -49,15 +50,16 @@ export default function Options({ opacity }: OptionsProps) {
                     onMouseLeave={() => setHoverDev(false)}
                     onClick={handleClick}
                 >
-                    <svg  style={svgStyle}>
+                    <svg style={svgStyle}>
                         <rect
-                            width="99%"
-                            height="99%"
-                            rx={10}
-                            ry={10}
+                            width="100%"
+                            height="100%"
+                            rx="10"
+                            ry="10"
                             style={{
                                 fill: 'none',
-                                stroke: '#fff',
+                                stroke: 'currentColor',
+                                strokeWidth: '4',
                                 strokeDasharray: hoverDev ? '20 320' : '400 0',
                                 strokeDashoffset: hoverDev ? 100 : 40,
                                 transition: 'all 1.35s cubic-bezier(0.15, 1, 0.22, 1)'
@@ -79,13 +81,14 @@ export default function Options({ opacity }: OptionsProps) {
                 >
                     <svg style={svgStyle}>
                         <rect
-                            width="99%"
-                            height="99%"
+                            width="100%"
+                            height="100%"
                             rx="10"
                             ry="10"
                             style={{
                                 fill: 'none',
-                                stroke: '#fff',
+                                stroke: 'currentColor',
+                                strokeWidth: '4',
                                 strokeDasharray: hoverUser ? '15, 310' : '400, 0',
                                 strokeDashoffset: hoverUser ? 100 : 40,
                                 transition: 'all 1.35s cubic-bezier(0.19, 1, 0.22, 1)'
