@@ -22,14 +22,18 @@ export default function Home() {
     window.addEventListener("scroll", updateProgre, { passive: true })
     updateProgre()
 
+    setTimeout(() => {
+      setGatillo(!gatillo);
+    }, 500)
     return () => window.removeEventListener("scroll", updateProgre)
   }, []);
 
   return (
     <div className="relative" >
-      <button onClick={() => setGatillo(!gatillo)}> hola mama</button>
-      <PixelBack gatillo={!gatillo} />
-      <div style={{ position: 'fixed', bottom: `${progreView}%` , left: '50%', transform: 'translateX(-50%)', fontSize: '1rem', fontWeight: 'bold', opacity: progreView >= 100 ? 0 : 100, transition: 'opacity 0.5s ease', }}>
+      <div className="fixed inset-0 z-10">
+        <PixelBack gatillo={!gatillo} />
+      </div>
+      <div style={{ position: 'fixed', bottom: `${progreView}%`, left: '50%', transform: 'translateX(-50%)', fontSize: '1rem', fontWeight: 'bold', opacity: progreView >= 100 ? 0 : 100, transition: 'opacity 0.5s ease', }}>
         {Math.round(progreView)}%
       </div>
       <Landing />
