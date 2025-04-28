@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 
 interface OptionsProps {
     opacity: number;
@@ -13,22 +13,23 @@ export default function Options({ opacity }: OptionsProps) {
         console.log("Button clicked");
     };
 
-    const buttonBaseStyle = {
-        position: 'relative' as const,
-        padding: '20px',
-        background: 'transparent',
-        // outline: 'none',
-        // cursor: 'pointer',
-        // overflow: 'visible'
+    const buttonBaseStyle: CSSProperties = {
+        position: "relative",
+        padding: "20px",
+        background: "transparent",
+        outline: "none",
+        cursor: "pointer",
+        overflow: "visible",
     };
 
-    const svgStyle = {
-        height: '100%',
-        width: '100%',
-        left: 0,
+    const svgStyle: CSSProperties = {
+        position: "absolute",
         top: 0,
-        position: 'absolute' as const,
-        // pointerEvents: 'none' as const
+        left: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+        transition: "border 0.3s ease, transform 0.3s ease",
     };
 
     return (
@@ -37,7 +38,7 @@ export default function Options({ opacity }: OptionsProps) {
                 opacity: op,
                 transition: 'opacity 0.5s ease-out'
             }}
-            className="w-full min-h-screen flex items-center justify-center max-h-screen"
+            className="w-full min-h-screen flex items-center justify-center"
         >
             <div className="flex items-center space-x-4 gap-10">
                 <button className="text-6xl font-bold"
@@ -48,16 +49,16 @@ export default function Options({ opacity }: OptionsProps) {
                     onMouseLeave={() => setHoverDev(false)}
                     onClick={handleClick}
                 >
-                    <svg style={svgStyle}>
+                    <svg  style={svgStyle}>
                         <rect
-                            width="100%"
-                            height="100%"
-                            rx="20"
-                            ry="20"
+                            width="99%"
+                            height="99%"
+                            rx={10}
+                            ry={10}
                             style={{
                                 fill: 'none',
                                 stroke: '#fff',
-                                strokeDasharray: hoverDev ? '15, 310' : '400, 0',
+                                strokeDasharray: hoverDev ? '20 320' : '400 0',
                                 strokeDashoffset: hoverDev ? 100 : 40,
                                 transition: 'all 1.35s cubic-bezier(0.15, 1, 0.22, 1)'
                             }}
@@ -78,10 +79,10 @@ export default function Options({ opacity }: OptionsProps) {
                 >
                     <svg style={svgStyle}>
                         <rect
-                            width="100%"
-                            height="100%"
-                            rx="20"
-                            ry="20"
+                            width="99%"
+                            height="99%"
+                            rx="10"
+                            ry="10"
                             style={{
                                 fill: 'none',
                                 stroke: '#fff',
