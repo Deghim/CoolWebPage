@@ -4,15 +4,9 @@ import { motion } from 'framer-motion';
 
 const anim = {
     initial: { opacity: 0 },
-    open: (i: number) => ({
-        opacity: 1,
-        transition: { duration: 0, delay: 0.01 * i }
-    }),
-    closed: (i: number) => ({
-        opacity: 0,
-        transition: { duration: 0, delay: 0.01 * i }
-    })
-}
+    open: (i: number) => ({ opacity: 1, transition: { duration: 0, delay: 0.01 * i } }),
+    closed: (i: number) => ({ opacity: 0, transition: { duration: 0, delay: 0.01 * i } }),
+};
 
 function shuffleArray<T>(array: T[]): T[] {
     for (let i = array.length - 1; i > 0; i--) {
@@ -27,25 +21,24 @@ export default function PixelBack({ gatillo }: { gatillo: boolean }) {
 
     useEffect(() => {
         const generateBlocks = () => {
-            const blockSize = window.innerWidth * 0.05;
+            const blockSize = window.innerWidth * 0.025;
             const amountOfBlocks = Math.ceil(window.innerHeight / blockSize);
 
-            const columnBlocks = [];
+            const columnBlocks: JSX.Element[][] = [];
+            const NUM_COLUMNS = 40;
 
-            for (let col = 0; col < 20; col++) {
+            for (let col = 0; col < NUM_COLUMNS; col++) {
                 const delays = shuffleArray([...Array(amountOfBlocks)].map((_, i) => i));
-                const columnElements = delays.map((randomDelay, i) => {
-                    return (
-                        <motion.div
-                            variants={anim}
-                            initial="initial"
-                            animate={gatillo ? "open" : "closed"}
-                            custom={randomDelay}
-                            key={i}
-                            style={block}
-                        ></motion.div>
-                    );
-                });
+                const columnElements = delays.map((randomDelay, i) => (
+                    <motion.div
+                        variants={anim}
+                        initial="initial"
+                        animate={gatillo ? "open" : "closed"}
+                        custom={randomDelay}
+                        key={i}
+                        style={blockStyle}
+                    />
+                ));
                 columnBlocks.push(columnElements);
             }
 
@@ -54,31 +47,30 @@ export default function PixelBack({ gatillo }: { gatillo: boolean }) {
 
         generateBlocks();
         window.addEventListener('resize', generateBlocks);
-
         return () => window.removeEventListener('resize', generateBlocks);
     }, [gatillo]);
 
     const pixelBackground: CSSProperties = {
         display: 'flex',
         height: '100vh',
-        overflow: "hidden",
-    }
+        overflow: 'hidden',
+    };
 
-    const column: CSSProperties = {
-        width: "5vw",
-        height: "100%"
-    }
+    const columnStyle: CSSProperties = {
+        width: '2.5vw',
+        height: '100%',
+    };
 
-    const block: CSSProperties = {
-        height: '5vw',
+    const blockStyle: CSSProperties = {
         width: '100%',
-        backgroundColor: "orange"
-    }
+        height: '2.5vw',
+        backgroundColor: 'orange',
+    };
 
     return (
         <div style={pixelBackground}>
             {blocks.map((columnBlocks, i) => (
-                <div key={i} style={column}>
+                <div key={i} style={columnStyle}>
                     {columnBlocks}
                 </div>
             ))}
