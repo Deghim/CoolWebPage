@@ -14,7 +14,7 @@ export default function Home() {
       const raw: number = (scrollY / viewPortH) * 100
       const pct: number = Math.min(Math.max(raw, 0), 100);
 
-      setProgreView(Math.round(pct))
+      setProgreView(pct)
     }
 
     window.addEventListener("scroll", updateProgre, { passive: true })
