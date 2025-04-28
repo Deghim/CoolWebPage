@@ -12,7 +12,6 @@ export default function Home() {
       const viewPortH: number = window.innerHeight
 
       const raw: number = (scrollY / viewPortH) * 100
-
       const pct: number = Math.min(Math.max(raw, 0), 100);
 
       setProgreView(Math.round(pct))
@@ -30,7 +29,7 @@ export default function Home() {
         {progreView}%
       </div>
       <Landing />
-      <Options />
+      <Options opacity={progreView >= 100 ? 100 : 0} />
     </div>
   );
 }
