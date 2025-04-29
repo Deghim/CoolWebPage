@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PixelBack from "./pixelBackground/pixelBackground";
 
 export default function Home() {
+  const [showAnimation, setShowAnimation] = useState(true)
   const [gatillo, setGatillo] = useState(false);
   const [progreView, setProgreView] = useState(0);
 
@@ -24,15 +25,18 @@ export default function Home() {
 
     setTimeout(() => {
       setGatillo(!gatillo);
+      setTimeout(()=>{
+        setShowAnimation(false);
+      },1000)
     }, 500)
     return () => window.removeEventListener("scroll", updateProgre)
   }, []);
 
   return (
     <div className="relative" >
-      <div className="fixed inset-0 z-10">
+      {showAnimation && (<div className="fixed inset-0 z-10">
         <PixelBack gatillo={!gatillo} />
-      </div>
+      </div>)}
       <div style={{ position: 'fixed', bottom: `${progreView}%`, left: '50%', transform: 'translateX(-50%)', fontSize: '1rem', fontWeight: 'bold', opacity: progreView >= 100 ? 0 : 100, transition: 'opacity 0.5s ease', }}>
         {Math.round(progreView)}%
       </div>
