@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CSSProperties, useState } from "react";
 
@@ -44,6 +45,7 @@ export default function Options({ opacity }: OptionsProps) {
             className="w-full min-h-screen flex items-center justify-center"
         >
             <div className="flex items-center space-x-4 gap-10">
+                <Link href={"/terminal"}>
                 <button className="text-6xl font-bold"
                     style={{
                         ...buttonBaseStyle,
@@ -70,6 +72,7 @@ export default function Options({ opacity }: OptionsProps) {
                     </svg>
                     Dev. Exp.
                 </button>
+                </Link>
 
                 <button
                     className="text-6xl font-bold"

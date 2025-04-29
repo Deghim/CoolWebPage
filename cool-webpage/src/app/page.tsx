@@ -1,6 +1,6 @@
 'use client';
-import Landing from "./pages/landing";
-import Options from "./pages/options";
+import Landing from "./landing/landing";
+import Options from "./options/options";
 import { useEffect, useState } from "react";
 import PixelBack from "./pixelBackground/pixelBackground";
 
