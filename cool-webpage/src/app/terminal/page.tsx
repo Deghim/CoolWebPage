@@ -11,6 +11,12 @@ export default function Terminal() {
     const [showAnimation, setShowAnimation] = useState(true);
     const [gatillo, setGatillo] = useState(false);
 
+    const [terminalContent, setTerminalContent] = useState<string[]>([
+        `Last login: ${date} on ttys000`,
+        "Welcome to Jorge's Terminal",
+        "Type 'help' to see available commands"
+    ]);
+
     const [input, setInput] = useState("");
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
@@ -24,8 +30,7 @@ export default function Terminal() {
         help: {
             description: "Display available commands",
             action: () => {
-                setOutput(prev => [
-                    ...prev,
+                const lines: string[] = [
                     "Available commands:",
                     "  help       - Display available commands",
                     "  clear      - Clear terminal output",
@@ -35,31 +40,35 @@ export default function Terminal() {
                     "  social     - Display social networks",
                     "  secret     - Password required",
                     "  exit       - Exit"
-                ]);
+                ]
+                setOutput(prev => [...prev, ...lines]);
+                setTerminalContent(prev => [...prev, ...lines])
             }
         },
         clear: {
             description: "Clear terminal output",
             action: () => {
                 setOutput([]);
+                setTerminalContent([]);
             }
         },
         whois: {
             description: "Who is Jorge?",
             action: () => {
-                setOutput(prev => [
-                    ...prev,
+                const whoLines: string[] = [
                     "Jorge Chavira - Software Developer",
                     "-----------------------------------",
                     "A passionate developer focused on creating interactive web experiences.",
-                    "Skills include React, Next.js, and creative front-end development."
-                ]);
+                    "Skills include React, Next.js, and creative front-end development."]
+                setOutput(prev => [...prev, ...whoLines]);
+                setTerminalContent(prev => [...prev, ...whoLines]);
             }
         },
         videos: {
             description: "Visit YouTube channel",
             action: () => {
                 setOutput(prev => [...prev, "Opening YouTube channel..."]);
+                setTerminalContent(prev => [...prev, "Opening YouTube channel..."]);
                 window.open("https://youtube.com/@jorge_u.?si=YPu61fGhdszhBLhb", "_blank");
             }
         },
@@ -67,18 +76,26 @@ export default function Terminal() {
             description: "Visit GitHub",
             action: () => {
                 setOutput(prev => [...prev, "Opening GitHub profile..."]);
+                setTerminalContent(prev => [...prev, "Opening GitHub profile..."]);
                 window.open("https://github.com/Deghim", "_blank");
             }
         },
         social: {
             description: "Display social networks",
             action: () => {
-                setOutput(prev => [
-                    ...prev,
+                const networks: string[] = [
                     "Social Networks:",
                     "  • LinkedIn: https://tinyurl.com/jorgeLinkIn",
                     "  • TikTok: https://tinyurl.com/jorgeTikTok",
                     "  • Instagram: https://tinyurl.com/jorgeInsta"
+                ]
+                setOutput(prev => [
+                    ...prev,
+                    ...networks
+                ]);
+                setTerminalContent(prev => [
+                    ...prev,
+                    ...networks
                 ]);
             }
         },
@@ -88,9 +105,11 @@ export default function Terminal() {
                 const password = prompt("Enter password:");
                 if (password === "opensesame") {
                     setOutput(prev => [...prev, "Access granted. Secret content unlocked!"]);
+                    setTerminalContent(prev => [...prev, "Access granted. Secret content unlocked!"]);
                     // Add your secret content action here
                 } else {
                     setOutput(prev => [...prev, "Access denied. Incorrect password."]);
+                    setTerminalContent(prev => [...prev, "Access denied. Incorrect password."]);
                 }
             }
         },
@@ -98,6 +117,7 @@ export default function Terminal() {
             description: "Exit",
             action: () => {
                 setOutput(prev => [...prev, "Exiting terminal. Redirecting to homepage..."]);
+                setTerminalContent(prev => [...prev, "Exiting terminal. Redirecting to homepage..."]);
                 setTimeout(() => {
                     router.push("/")
                 }, 1000)
@@ -131,6 +151,7 @@ export default function Terminal() {
         setHistoryIndex(-1);
 
         setOutput(prev => [...prev, `${promptText}${trimmedCmd}`]);
+        setTerminalContent(prev => [...prev, `${promptText}${trimmedCmd}`]);
 
         const [command] = trimmedCmd.split(" ");
 
@@ -138,6 +159,7 @@ export default function Terminal() {
             commands[command].action();
         } else {
             setOutput(prev => [...prev, `Command not found: ${command}. Type 'help' for available commands.`]);
+            setTerminalContent(prev => [...prev, `Command not found: ${command}. Type 'help' for available commands.`]);
         }
 
         setInput("");
@@ -146,6 +168,7 @@ export default function Terminal() {
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             executeCommand(input);
+            // setAllhistory(prev => [...prev, input])
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
             if (commandHistory.length > 0) {
@@ -174,6 +197,7 @@ export default function Terminal() {
                     setInput(suggestions[0] + " ");
                 } else if (suggestions.length > 1) {
                     setOutput(prev => [...prev, `${promptText}${currentInput}`, ...suggestions]);
+                    setTerminalContent(prev => [...prev, `${promptText}${currentInput}`, ...suggestions]);
                 }
             }
         }
@@ -242,7 +266,7 @@ export default function Terminal() {
                         />
                     </div>
                 </div>
-                <MiniTerm/>
+                <MiniTerm content={terminalContent} />
             </div>
         </>
     );
