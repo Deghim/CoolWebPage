@@ -1,37 +1,235 @@
 "use client";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import PixelBack from "../pixelBackground/pixelBackground";
 
-
 export default function Terminal() {
-    const [showAnimation, setShowAnimation] = useState(true)
+    const [showAnimation, setShowAnimation] = useState(true);
     const [gatillo, setGatillo] = useState(false);
 
+    const [input, setInput] = useState("");
+    const [commandHistory, setCommandHistory] = useState<string[]>([]);
+    const [historyIndex, setHistoryIndex] = useState(-1);
+    const [output, setOutput] = useState<string[]>(["Welcome to Jorge's Terminal", "Type 'help' to see available commands"]);
+    const [promptText, setPromptText] = useState("guest@guest-Jorges-CoolWebPage:~$ ");
+
+    const terminalRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const commands: Record<string, { description: string, action: () => void }> = {
+        help: {
+            description: "Display available commands",
+            action: () => {
+                setOutput(prev => [
+                    ...prev,
+                    "Available commands:",
+                    "  help       - Display available commands",
+                    "  clear      - Clear terminal output",
+                    "  whois      - Who is Jorge?",
+                    "  videos     - Visit YouTube channel",
+                    "  projects   - Visit GitHub",
+                    "  social     - Display social networks",
+                    "  secret     - Password required"
+                ]);
+            }
+        },
+        clear: {
+            description: "Clear terminal output",
+            action: () => {
+                setOutput([]);
+            }
+        },
+        whois: {
+            description: "Who is Jorge?",
+            action: () => {
+                setOutput(prev => [
+                    ...prev,
+                    "Jorge Chavira - Software Developer",
+                    "-----------------------------------",
+                    "A passionate developer focused on creating interactive web experiences.",
+                    "Skills include React, Next.js, and creative front-end development."
+                ]);
+            }
+        },
+        videos: {
+            description: "Visit YouTube channel",
+            action: () => {
+                setOutput(prev => [...prev, "Opening YouTube channel..."]);
+                window.open("https://youtube.com/@yourchannelhere", "_blank");
+            }
+        },
+        projects: {
+            description: "Visit GitHub",
+            action: () => {
+                setOutput(prev => [...prev, "Opening GitHub profile..."]);
+                window.open("https://github.com/yourusername", "_blank");
+            }
+        },
+        social: {
+            description: "Display social networks",
+            action: () => {
+                setOutput(prev => [
+                    ...prev,
+                    "Social Networks:",
+                    "  • LinkedIn: linkedin.com/in/yourusername",
+                    "  • Twitter: twitter.com/yourusername",
+                    "  • Instagram: instagram.com/yourusername"
+                ]);
+            }
+        },
+        secret: {
+            description: "Password required",
+            action: () => {
+                const password = prompt("Enter password:");
+                if (password === "opensesame") {
+                    setOutput(prev => [...prev, "Access granted. Secret content unlocked!"]);
+                    // Add your secret content action here
+                } else {
+                    setOutput(prev => [...prev, "Access denied. Incorrect password."]);
+                }
+            }
+        }
+    };
+
     useEffect(() => {
-        setGatillo(!false)
         setTimeout(() => {
+            setGatillo(!gatillo);
             setTimeout(() => {
-                setShowAnimation(false)
-            }, 1000)
-
-        }, 500)
-
+                setShowAnimation(false);
+            }, 1000);
+        }, 500);
     }, []);
 
+    // Auto-focus input and scroll to bottom when output changes
+    useEffect(() => {
+        inputRef.current?.focus();
+        if (terminalRef.current) {
+            terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+        }
+    }, [output]);
+
+    // Handle command execution
+    const executeCommand = (cmd: string) => {
+        const trimmedCmd = cmd.trim();
+
+        if (trimmedCmd === "") return;
+
+        setCommandHistory(prev => [...prev, trimmedCmd]);
+        setHistoryIndex(-1);
+
+        setOutput(prev => [...prev, `${promptText}${trimmedCmd}`]);
+
+        const [command, ...args] = trimmedCmd.split(" ");
+
+        if (commands[command]) {
+            commands[command].action();
+        } else {
+            setOutput(prev => [...prev, `Command not found: ${command}. Type 'help' for available commands.`]);
+        }
+
+        setInput("");
+    };
+
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            executeCommand(input);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            if (commandHistory.length > 0) {
+                const newIndex = historyIndex < commandHistory.length - 1 ? historyIndex + 1 : historyIndex;
+                setHistoryIndex(newIndex);
+                setInput(commandHistory[commandHistory.length - 1 - newIndex] || "");
+            }
+        } else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            if (historyIndex > 0) {
+                const newIndex = historyIndex - 1;
+                setHistoryIndex(newIndex);
+                setInput(commandHistory[commandHistory.length - 1 - newIndex] || "");
+            } else if (historyIndex === 0) {
+                setHistoryIndex(-1);
+                setInput("");
+            }
+        } else if (e.key === "Tab") {
+            e.preventDefault();
+
+            const currentInput = input.trim();
+            if (currentInput !== "") {
+                const suggestions = Object.keys(commands).filter(cmd => cmd.startsWith(currentInput));
+
+                if (suggestions.length === 1) {
+                    setInput(suggestions[0] + " ");
+                } else if (suggestions.length > 1) {
+                    setOutput(prev => [...prev, `${promptText}${currentInput}`, ...suggestions]);
+                }
+            }
+        }
+    };
+
+    const terminalStyle = {
+        fontFamily: "'JetBrains Mono', monospace",
+        overflow: "auto",
+        display: "flex",
+        flexDirection: "column" as const
+    };
+
+    const outputContainerStyle = {
+        flexGrow: 1,
+        overflowY: "auto" as const,
+    };
+
+    const inputContainerStyle = {
+        display: "flex",
+        flexDirection: "row" as const,
+        alignItems: "center"
+    };
+
+    const promptStyle = {
+        // color: "#5fba7d",
+        marginRight: "10px",
+        whiteSpace: "nowrap" as const
+    };
+
+    const inputStyle = {
+        // backgroundColor: "transparent",
+        border: "none",
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: "inherit",
+        outline: "none",
+        width: "100%"
+    };
 
     return (
         <>
-            {showAnimation &&
-                <div className="fixed inset-0 z-10" >
+            {showAnimation && (
+                <div className="fixed inset-0 z-10">
                     <PixelBack gatillo={!gatillo} />
                 </div>
+            )}
 
-            }
-            <p>Hola mama</p>
-           <Link href={"/"}>
-           <button >Soy un boton</button>
-           </Link>
+            <div style={terminalStyle} ref={terminalRef}>
+                <div style={outputContainerStyle}>
+                    {output.map((line, index) => (
+                        <div key={index} >
+                            {line}
+                        </div>
+                    ))}
+                </div>
+                <div style={inputContainerStyle}>
+                    <span style={promptStyle}>{promptText}</span>
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        style={inputStyle}
+                        autoFocus
+                        spellCheck="false"
+                        autoComplete="off"
+                        autoCapitalize="off"
+                    />
+                </div>
+            </div>
         </>
-    )
+    );
 }
