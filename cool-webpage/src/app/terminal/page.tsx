@@ -3,6 +3,8 @@ import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import PixelBack from "../pixelBackground/pixelBackground";
 import { useRouter } from "next/navigation";
 
+import MiniTerm from "./miniTerminal";
+
 export default function Terminal() {
     const date: Date = new Date()
     const router = useRouter()
@@ -12,7 +14,7 @@ export default function Terminal() {
     const [input, setInput] = useState("");
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
-    const [output, setOutput] = useState<string[]>([`Last login: ${date} on ttys000`,"Welcome to Jorge's Terminal", "Type 'help' to see available commands"]);
+    const [output, setOutput] = useState<string[]>([`Last login: ${date} on ttys000`, "Welcome to Jorge's Terminal", "Type 'help' to see available commands"]);
     const promptText: string = "guest@guest-Jorges-CoolWebPage:~$ ";
 
     const terminalRef = useRef<HTMLDivElement>(null);
@@ -215,30 +217,32 @@ export default function Terminal() {
                     <PixelBack gatillo={!gatillo} />
                 </div>
             )}
-
-            <div style={terminalStyle} ref={terminalRef}>
-                <div style={outputContainerStyle}>
-                    {output.map((line, index) => (
-                        <div key={index} >
-                            {line}
-                        </div>
-                    ))}
+            <div className="Aqui van a estar la terminal y el minimapa de la terminal">
+                <div style={terminalStyle} ref={terminalRef}>
+                    <div style={outputContainerStyle}>
+                        {output.map((line, index) => (
+                            <div key={index} >
+                                {line}
+                            </div>
+                        ))}
+                    </div>
+                    <div style={inputContainerStyle}>
+                        <span style={promptStyle}>{promptText}</span>
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            style={inputStyle}
+                            autoFocus
+                            spellCheck="false"
+                            autoComplete="off"
+                            autoCapitalize="off"
+                        />
+                    </div>
                 </div>
-                <div style={inputContainerStyle}>
-                    <span style={promptStyle}>{promptText}</span>
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        style={inputStyle}
-                        autoFocus
-                        spellCheck="false"
-                        autoComplete="off"
-                        autoCapitalize="off"
-                    />
-                </div>
+                <MiniTerm/>
             </div>
         </>
     );
