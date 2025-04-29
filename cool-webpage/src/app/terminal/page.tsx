@@ -1,6 +1,9 @@
 "use client";
 import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import PixelBack from "../pixelBackground/pixelBackground";
+import { exit } from "process";
+import Link from "next/link";
+import { Router } from "next/router";
 
 export default function Terminal() {
     const [showAnimation, setShowAnimation] = useState(true);
@@ -28,7 +31,8 @@ export default function Terminal() {
                     "  videos     - Visit YouTube channel",
                     "  projects   - Visit GitHub",
                     "  social     - Display social networks",
-                    "  secret     - Password required"
+                    "  secret     - Password required",
+                    "  exit       - Exit"
                 ]);
             }
         },
@@ -54,14 +58,14 @@ export default function Terminal() {
             description: "Visit YouTube channel",
             action: () => {
                 setOutput(prev => [...prev, "Opening YouTube channel..."]);
-                window.open("https://youtube.com/@yourchannelhere", "_blank");
+                window.open("https://youtube.com/@jorge_u.?si=YPu61fGhdszhBLhb", "_blank");
             }
         },
         projects: {
             description: "Visit GitHub",
             action: () => {
                 setOutput(prev => [...prev, "Opening GitHub profile..."]);
-                window.open("https://github.com/yourusername", "_blank");
+                window.open("https://github.com/Deghim", "_blank");
             }
         },
         social: {
@@ -70,9 +74,9 @@ export default function Terminal() {
                 setOutput(prev => [
                     ...prev,
                     "Social Networks:",
-                    "  • LinkedIn: linkedin.com/in/yourusername",
-                    "  • Twitter: twitter.com/yourusername",
-                    "  • Instagram: instagram.com/yourusername"
+                    "  • LinkedIn: https://tinyurl.com/jorgeLinkIn",
+                    "  • TikTok: https://tinyurl.com/jorgeTikTok",
+                    "  • Instagram: https://tinyurl.com/jorgeInsta"
                 ]);
             }
         },
@@ -87,6 +91,13 @@ export default function Terminal() {
                     setOutput(prev => [...prev, "Access denied. Incorrect password."]);
                 }
             }
+        },
+        exit: {
+            description: "Exit",
+            action: () => {
+                setOutput(prev => [...prev, "Exiting..."]);
+
+            }
         }
     };
 
@@ -99,7 +110,6 @@ export default function Terminal() {
         }, 500);
     }, []);
 
-    // Auto-focus input and scroll to bottom when output changes
     useEffect(() => {
         inputRef.current?.focus();
         if (terminalRef.current) {
@@ -107,7 +117,6 @@ export default function Terminal() {
         }
     }, [output]);
 
-    // Handle command execution
     const executeCommand = (cmd: string) => {
         const trimmedCmd = cmd.trim();
 
