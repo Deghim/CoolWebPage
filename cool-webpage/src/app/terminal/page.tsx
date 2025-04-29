@@ -1,11 +1,10 @@
 "use client";
 import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import PixelBack from "../pixelBackground/pixelBackground";
-import { exit } from "process";
-import Link from "next/link";
-import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Terminal() {
+    const router = useRouter()
     const [showAnimation, setShowAnimation] = useState(true);
     const [gatillo, setGatillo] = useState(false);
 
@@ -13,7 +12,7 @@ export default function Terminal() {
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
     const [output, setOutput] = useState<string[]>(["Welcome to Jorge's Terminal", "Type 'help' to see available commands"]);
-    const [promptText, setPromptText] = useState("guest@guest-Jorges-CoolWebPage:~$ ");
+    const promptText: string = "guest@guest-Jorges-CoolWebPage:~$ ";
 
     const terminalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -95,7 +94,10 @@ export default function Terminal() {
         exit: {
             description: "Exit",
             action: () => {
-                setOutput(prev => [...prev, "Exiting..."]);
+                setOutput(prev => [...prev, "Exiting terminal. Redirecting to homepage..."]);
+                setTimeout(() => {
+                    router.push("/")
+                }, 1000)
 
             }
         }
@@ -127,7 +129,7 @@ export default function Terminal() {
 
         setOutput(prev => [...prev, `${promptText}${trimmedCmd}`]);
 
-        const [command, ...args] = trimmedCmd.split(" ");
+        const [command] = trimmedCmd.split(" ");
 
         if (commands[command]) {
             commands[command].action();
@@ -193,13 +195,11 @@ export default function Terminal() {
     };
 
     const promptStyle = {
-        // color: "#5fba7d",
         marginRight: "10px",
         whiteSpace: "nowrap" as const
     };
 
     const inputStyle = {
-        // backgroundColor: "transparent",
         border: "none",
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: "inherit",
