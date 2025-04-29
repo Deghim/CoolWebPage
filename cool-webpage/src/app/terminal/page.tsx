@@ -4,6 +4,7 @@ import PixelBack from "../pixelBackground/pixelBackground";
 import { useRouter } from "next/navigation";
 
 export default function Terminal() {
+    const date: Date = new Date()
     const router = useRouter()
     const [showAnimation, setShowAnimation] = useState(true);
     const [gatillo, setGatillo] = useState(false);
@@ -11,7 +12,7 @@ export default function Terminal() {
     const [input, setInput] = useState("");
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
-    const [output, setOutput] = useState<string[]>(["Welcome to Jorge's Terminal", "Type 'help' to see available commands"]);
+    const [output, setOutput] = useState<string[]>([`Last login: ${date} on ttys000`,"Welcome to Jorge's Terminal", "Type 'help' to see available commands"]);
     const promptText: string = "guest@guest-Jorges-CoolWebPage:~$ ";
 
     const terminalRef = useRef<HTMLDivElement>(null);
