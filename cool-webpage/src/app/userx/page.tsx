@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react"
 import PixelBack from "../pixelBackground/pixelBackground"
-import Link from "next/link";
+import Carousel from "./carousel";
 
 export default function UserX() {
     const [showAnimation, setShowAnimation] = useState(true);
@@ -37,12 +37,7 @@ export default function UserX() {
                     }}
                 >Jorge U.</p>
             </section>
-            <section className=" relative w-full min-h-screen">
-                <Link href={"/"}>
-                    <button>regresar al home</button>
-                </Link>
-
-            </section>
+            <Carousel/>
         </div>
     )
 }
