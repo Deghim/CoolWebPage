@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import PixelBack from "../pixelBackground/pixelBackground";
 import { useRouter } from "next/navigation";
 
-import MiniTerm from "./miniTerminal";
+import MiniTerm from "../minimap/miniTerminal";
 
 export default function Terminal() {
     const date: Date = new Date()
