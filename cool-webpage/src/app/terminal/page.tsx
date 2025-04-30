@@ -131,7 +131,7 @@ export default function Terminal() {
                 setTerminalContent(prev => [...prev, "Exiting terminal. Redirecting to homepage..."]);
                 setTimeout(() => {
                     router.push("/")
-                }, 1000)
+                }, 300)
 
             }
         }
