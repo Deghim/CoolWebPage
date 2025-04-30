@@ -49,7 +49,7 @@ export default function Terminal() {
             description: "Clear terminal output",
             action: () => {
                 setOutput([]);
-                setTerminalContent([]);
+                setTerminalContent([promptText]);
             }
         },
         whois: {
@@ -241,8 +241,16 @@ export default function Terminal() {
                     <PixelBack gatillo={!gatillo} />
                 </div>
             )}
-            <div className="Aqui van a estar la terminal y el minimapa de la terminal">
-                <div style={terminalStyle} ref={terminalRef}>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '16px',
+            }}>
+                <div style={{
+                    ...terminalStyle,
+                    flex: '1 1 auto',
+                    overflow: 'hidden',
+                }} ref={terminalRef}>
                     <div style={outputContainerStyle}>
                         {output.map((line, index) => (
                             <div key={index} >
@@ -266,7 +274,13 @@ export default function Terminal() {
                         />
                     </div>
                 </div>
-                <MiniTerm content={terminalContent} />
+                <div style={{
+                    flex: '0 0 150px',
+                    overflowY: 'auto',
+                    position:"sticky"
+                }}>
+                    <MiniTerm content={terminalContent} />
+                </div>
             </div>
         </>
     );
