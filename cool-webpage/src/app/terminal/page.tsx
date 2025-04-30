@@ -103,15 +103,16 @@ export default function Terminal() {
         secret: {
             description: "Password required",
             action: () => {
-                const password = prompt("Enter password:");
-                if (password === "opensesame") {
-                    setOutput(prev => [...prev, "Access granted. Secret content unlocked!"]);
-                    setTerminalContent(prev => [...prev, "Access granted. Secret content unlocked!"]);
-                    // Add your secret content action here
-                } else {
-                    setOutput(prev => [...prev, "Access denied. Incorrect password."]);
-                    setTerminalContent(prev => [...prev, "Access denied. Incorrect password."]);
-                }
+                setOutput(prev => [...prev, "Lol. I'm working on that..."]);
+                // const password = prompt("Enter password:");
+                // if (password === "opensesame") {
+                //     setOutput(prev => [...prev, "Access granted. Secret content unlocked!"]);
+                //     setTerminalContent(prev => [...prev, "Access granted. Secret content unlocked!"]);
+                //     // Add your secret content action here
+                // } else {
+                //     setOutput(prev => [...prev, "Access denied. Incorrect password."]);
+                //     setTerminalContent(prev => [...prev, "Access denied. Incorrect password."]);
+                // }
             }
         },
         exit: {

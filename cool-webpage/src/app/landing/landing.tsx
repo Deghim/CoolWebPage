@@ -11,13 +11,13 @@ export default function Landing() {
                 <span >
                     <TypeAnimation
                         sequence={[
-                            "user!", 1500,
-                            "developer!", 1500,
-                            "mom!", 1500,
-                            "&$!#%!", 1500
+                            "user!", 1000,
+                            "developer!", 1000,
+                            "mom!", 1000,
+                            "recruiter!", 1000
                         ]}
                         wrapper="span"
-                        speed={10}
+                        speed={20}
                         className="text-6xl font-bold"
                         repeat={Infinity}
                     />
