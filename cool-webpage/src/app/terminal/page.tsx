@@ -14,7 +14,8 @@ export default function Terminal() {
     const [terminalContent, setTerminalContent] = useState<string[]>([
         `Last login: ${date} on ttys000`,
         "Welcome to Jorge's Terminal",
-        "Type 'help' to see available commands"
+        "Type 'help' to see available commands",
+        "guest@guest-Jorges-CoolWebPage:~$ "
     ]);
 
     const [input, setInput] = useState("");
@@ -276,8 +277,11 @@ export default function Terminal() {
                 </div>
                 <div style={{
                     flex: '0 0 150px',
+                    position: 'sticky',
+                    top: '20px',
+                    alignSelf: 'start',
                     overflowY: 'auto',
-                    position:"sticky"
+                    zIndex: 1,
                 }}>
                     <MiniTerm content={terminalContent} />
                 </div>
