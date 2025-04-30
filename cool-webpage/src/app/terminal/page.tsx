@@ -10,6 +10,7 @@ export default function Terminal() {
     const router = useRouter()
     const [showAnimation, setShowAnimation] = useState(true);
     const [gatillo, setGatillo] = useState(false);
+    const [inputFocused, setInputFocused] = useState(true);
 
     const [terminalContent, setTerminalContent] = useState<string[]>([
         `Last login: ${date} on ttys000`,
@@ -270,7 +271,10 @@ export default function Terminal() {
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
                             style={inputStyle}
+                            onFocus={() => setInputFocused(true)}
+                            onBlur={() => setInputFocused(false)}
                             autoFocus
+                            placeholder={!inputFocused ? "click me" : ""}
                             spellCheck="false"
                             autoComplete="off"
                             autoCapitalize="off"
