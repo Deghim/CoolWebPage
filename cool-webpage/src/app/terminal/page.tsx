@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import PixelBack from "../pixelBackground/pixelBackground";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,15 @@ export default function Terminal() {
 
     const terminalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setGatillo(!gatillo);
+            setTimeout(() => {
+                setShowAnimation(false);
+            }, 1000);
+        }, 500);
+    }, []);
 
     const commands: Record<string, { description: string, action: () => void }> = {
         help: {
@@ -128,14 +137,6 @@ export default function Terminal() {
         }
     };
 
-    useEffect(() => {
-        setTimeout(() => {
-            setGatillo(!gatillo);
-            setTimeout(() => {
-                setShowAnimation(false);
-            }, 1000);
-        }, 500);
-    }, []);
 
     useEffect(() => {
         inputRef.current?.focus();
