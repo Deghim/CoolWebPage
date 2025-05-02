@@ -6,6 +6,7 @@ import PixelBack from "./pixelBackground/pixelBackground";
 
 export default function Home() {
   const [showAnimation, setShowAnimation] = useState(true)
+  const [afterShowAnimation, setAfterShowAnimation] = useState(false)
   const [gatillo, setGatillo] = useState(false);
   const [progreView, setProgreView] = useState(0);
 
@@ -22,12 +23,15 @@ export default function Home() {
 
     window.addEventListener("scroll", updateProgre, { passive: true })
     updateProgre()
+    setTimeout(() => {
+      setAfterShowAnimation(true)
+    }, 250)
 
     setTimeout(() => {
       setGatillo(!gatillo);
-      setTimeout(()=>{
+      setTimeout(() => {
         setShowAnimation(false);
-      },1000)
+      }, 1000)
     }, 500)
     return () => window.removeEventListener("scroll", updateProgre)
   }, []);
@@ -37,11 +41,13 @@ export default function Home() {
       {showAnimation && (<div className="fixed inset-0 z-10">
         <PixelBack gatillo={!gatillo} />
       </div>)}
-      <div style={{ position: 'fixed', bottom: `${progreView}%`, left: '50%', transform: 'translateX(-50%)', fontSize: '1rem', fontWeight: 'bold', opacity: progreView >= 100 ? 0 : 100, transition: 'opacity 0.5s ease', }}>
-        {Math.round(progreView)}%
+      <div style={{ opacity: `${afterShowAnimation ? 1 : 0}` }}>
+        <div style={{ position: 'fixed', bottom: `${progreView}%`, left: '50%', transform: 'translateX(-50%)', fontSize: '1rem', fontWeight: 'bold', opacity: progreView >= 100 ? 0 : 100, transition: 'opacity 0.5s ease', }}>
+          {Math.round(progreView)}%
+        </div>
+        <Landing />
+        <Options opacity={progreView >= 100 ? 100 : 0} />
       </div>
-      <Landing />
-      <Options opacity={progreView >= 100 ? 100 : 0} />
     </div>
   );
 }

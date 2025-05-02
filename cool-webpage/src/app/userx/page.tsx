@@ -5,9 +5,14 @@ import Carousel from "./carousel";
 
 export default function UserX() {
     const [showAnimation, setShowAnimation] = useState(true);
+    const [afterShowAnimation, setAfterShowAnimation] = useState(false);
     const [gatillo, setGatillo] = useState(false);
 
     useEffect(() => {
+        setTimeout(() => {
+            setAfterShowAnimation(true);
+        }, 250)
+
         setTimeout(() => {
             setGatillo(!gatillo);
             setTimeout(() => {
@@ -24,7 +29,10 @@ export default function UserX() {
 
                 </div>
             )}
-            <section className=" relative w-full min-h-screen">
+            <section className=" relative w-full min-h-screen"
+                style={{
+                    opacity: `${afterShowAnimation ? 1 : 0}`
+                }}>
                 <p
                     style={{
                         position: 'absolute',
@@ -37,7 +45,7 @@ export default function UserX() {
                     }}
                 >Jorge U.</p>
             </section>
-            <Carousel/>
+            <Carousel />
         </div>
     )
 }

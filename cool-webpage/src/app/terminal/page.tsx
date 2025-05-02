@@ -9,6 +9,7 @@ export default function Terminal() {
     const date: Date = new Date()
     const router = useRouter()
     const [showAnimation, setShowAnimation] = useState(true);
+    const [afterShowAnimation, setAfterShowAnimation] = useState(false)
     const [gatillo, setGatillo] = useState(false);
     const [inputFocused, setInputFocused] = useState(true);
 
@@ -29,6 +30,9 @@ export default function Terminal() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
+        setTimeout(() => {
+            setAfterShowAnimation(true)
+        }, 250)
         setTimeout(() => {
             setGatillo(!gatillo);
             setTimeout(() => {
@@ -246,6 +250,7 @@ export default function Terminal() {
                 </div>
             )}
             <div style={{
+                opacity: `${afterShowAnimation ? 1 : 0}`,
                 display: 'flex',
                 flexDirection: 'row',
                 gap: '16px',

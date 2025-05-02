@@ -65,7 +65,7 @@ export default function PixelBack({ gatillo }: { gatillo: boolean }) {
     const blockStyle: CSSProperties = {
         width: '100%',
         height: '2.5vw',
-        backgroundColor: 'currentColor',
+        backgroundColor: 'var(--background)',
     };
 
     return (
