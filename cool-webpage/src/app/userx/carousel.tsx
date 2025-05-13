@@ -12,7 +12,7 @@ export default function Carousel() {
             </div>
             <div className=" flex-1 overflow-y-auto h-screen" >
                 <SectionInf
-                    information="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem reprehenderit architecto sunt itaque inventore nam quibusdam, porro saepe quo velit officia quos suscipit ad similique eius ullam vero adipisci veniam."
+                    information="Developer who’s been known to accidentally start projects in HTML before realizing I still need CSS to make them look pretty. In short, I’m always learning, occasionally debugging in my dreams, and forever grateful that semicolons sometimes matter in code, not sentences. Let’s build something fun (and functional) together!"
                     bulletTitle={["tech", "languages", "interests"]}
                     bulletPoints={[
                         ["html",
@@ -37,14 +37,14 @@ export default function Carousel() {
                             "sports"],
                     ]} />
                 <SectionInf
-                    information="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem reprehenderit architecto sunt itaque inventore nam quibusdam, porro saepe quo velit officia quos suscipit ad similique eius ullam vero adipisci veniam."
+                    information="I taught eager young minds how to conquer fractions and algebra… and discovered that “x” can be a notoriously shy character.  I sat shoulder-to-keyboard with seasoned developers, picked up best practices, and learned that “it works on my machine” is my moto."
                     bulletTitle={["first job", "second job"]}
                     bulletPoints={[
                         ["math tutor at kumon"],
                         ["software developer intern at 4040Apps"],
                     ]} />
                 <SectionInf
-                    information="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem reprehenderit architecto sunt itaque inventore nam quibusdam, porro saepe quo velit officia quos suscipit ad similique eius ullam vero adipisci veniam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem reprehenderit architecto sunt itaque inventore nam quibusdam, porro saepe quo velit officia quos suscipit ad similique eius ullam vero adipisci veniam."
+                    information="…And at the end of the day, whether I’m spinning up servers, marshaling mobile widgets, or wrangling algorithms, I’m always chasing that satisfying “it just works” moment"
                     bulletTitle={["web", "mobile", "other"]}
                     bulletPoints={[
                         [`ThreadOne - web app for a t-shirt store`,
