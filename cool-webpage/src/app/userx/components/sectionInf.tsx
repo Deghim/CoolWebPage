@@ -1,4 +1,6 @@
 'use client';
+import React, { CSSProperties } from 'react';
+
 interface SectionInformationProps {
     information: string;
     bulletTitle: string[];
@@ -6,48 +8,51 @@ interface SectionInformationProps {
 }
 
 export default function SectionInformation({ information, bulletTitle, bulletPoints }: SectionInformationProps) {
-    return (
 
-        <div>
-            <div
-                style={{
-                    marginTop: 'calc(var(--spacing)*30)',
-                    paddingRight: 'calc(var(--spacing)*10)',
-                    textAlign: 'justify',
-                    marginBottom: 'calc(var(--spacing)*10)'
-                }}>
-                <span>{information}</span>
+    const infoStyle: CSSProperties = {
+        textAlign: 'justify',
+        marginTop: '6rem',
+        paddingRight: '5rem'
+    };
+
+    const gridStyle: CSSProperties = {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(12rem, 1fr))',
+        padding: '1rem'
+    };
+
+    const titleStyle: CSSProperties = {
+        marginTop: '2rem',
+        marginBottom: '2rem',
+        fontSize: '1.125rem',
+        fontWeight: 'bold'
+    };
+
+    const listStyle: CSSProperties = {
+        marginLeft: '1.5rem',
+        listStyleType: 'disc',
+        listStylePosition: 'inside'
+    };
+
+    return (
+        <div style={{ height: '90vh' }}>
+            <div style={infoStyle}>
+                {information}
             </div>
-            <div className="flex flex-row "
-                style={{
-                    flexWrap:'wrap',
-                    gap: '40px',
-                    minHeight: '50%',
-                    width:'auto',
-                    border: '1px solid',
-                }}>
-                {bulletPoints.map((pt, i) => (
-                    <div key={i} className=" flex-1"
-                        style={{
-                            border: '1px solid',
-                            padding: '20px'
-                        }}>
-                        <h2 className="font-bold" style={{ margin: '20px 20px 40px 0px' }}>{bulletTitle[i]}</h2>
-                        <ul className="list-disc list-inside" style={{ marginLeft: '20px' }}>
-                            {pt.map((item, ii) => (<li key={ii} >{item}</li>))}
+            <div style={gridStyle}>
+                {bulletPoints.map((pts, i) => (
+                    <div key={i}>
+                        <h2 style={titleStyle}>{bulletTitle[i]}</h2>
+                        <ul style={listStyle}>
+                            {pts.map((item, ii) => (
+                                <li key={ii} style={{ marginBottom: '0.25rem' }}>
+                                    {item}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 ))}
             </div>
-
         </div>
-    )
+    );
 }
-
-/*
-    *  whois      - Who is Jorge?",
-    *  videos     - Visit YouTube channel",
-    *  projects   - Visit GitHub",
-    *  social     - Display social networks",
-    *  secret     - Password required",
- */
