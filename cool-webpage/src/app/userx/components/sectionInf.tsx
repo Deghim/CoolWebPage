@@ -54,8 +54,10 @@ export default function SectionInformation({ information, bulletTitle, bulletPoi
                             <h2 style={titleStyle}>{bulletTitle[i]}</h2>
                             <ul style={listStyle}>
                                 {pts.map((item, ii) =>
-                                    <li key={ii} style={{ marginBottom: '0.25rem', background: ii == highlightIndexes[i] ? "yellow" : "" }}>
-                                        {item}
+                                    <li key={ii} style={{ marginBottom: '0.25rem' }}>
+                                        <span style={{ background: ii == highlightIndexes[i] ? "yellow" : "" }}>
+                                            {item}
+                                        </span>
                                     </li>
                                 )}
                             </ul>
