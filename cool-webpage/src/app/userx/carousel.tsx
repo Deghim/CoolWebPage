@@ -33,11 +33,11 @@ export default function Carousel() {
                             "coffee and tea",
                             "sports"],
                     ]} />
-                {/* <SectionInf
+                <SectionInf
                     information="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem reprehenderit architecto sunt itaque inventore nam quibusdam, porro saepe quo velit officia quos suscipit ad similique eius ullam vero adipisci veniam."
                     bulletTitle={["first job", "second job"]}
                     bulletPoints={[
-                        ["math tutor"],
+                        ["math tutor at kumon"],
                         ["software developer intern at 4040Apps"],
                     ]} />
                 <SectionInf
@@ -49,7 +49,7 @@ export default function Carousel() {
                             `PacePoint - web app for traffic management`],
                         ["MAHUNT - android game app", "FastTrack - flutter app for emergency situation for smart traffick lights", "Slate - flutter app for personal task management ","RecipeBook - flutter app for recipes"],
                         ["smart traffic light system using ai", "simulation of various fluid equations using python ", "recreation of various data structures in java from zero "],
-                    ]} /> */}
+                    ]} />
             </div>
         </section>
     )
