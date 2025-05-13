@@ -33,7 +33,7 @@ export default function UserX() {
             <div style={{
                 opacity: `${afterShowAnimation ? 1 : 0}`
             }}>
-                <section className=" relative w-full min-h-screen">
+                <section className=" relative w-full h-screen">
                     <p className="absolute bottom-5 left-5 m-0 font-bold leading-none text-[15vw]">
                         Jorge U.
                     </p>
