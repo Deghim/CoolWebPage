@@ -25,12 +25,15 @@ export default function Carousel() {
                             "UNIX based systems",
                             "flutter",
                             "dart",
-                            "arduino"],
+                            "arduino",
+                            "react.js",
+                            "laravel"
+                        ],
                         ["english", "spanish", "french"],
                         ["technology",
                             "innovation",
                             "music",
-                            "coffee and tea",
+                            "coffee & tea",
                             "sports"],
                     ]} />
                 <SectionInf
