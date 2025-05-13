@@ -1,5 +1,5 @@
 'use client';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 
 interface SectionInformationProps {
     information: string;
@@ -8,6 +8,14 @@ interface SectionInformationProps {
 }
 
 export default function SectionInformation({ information, bulletTitle, bulletPoints }: SectionInformationProps) {
+    const [highlightIndexes, setHighlightIndexes] = useState<number[]>([]);
+
+    useEffect(() => {
+        setHighlightIndexes(
+            bulletPoints.map(pts => pts.length > 1 ? Math.floor(Math.random() * pts.length) : Math.random() > 0.5 ? 0 : -1)
+        );
+    }, [bulletPoints]);
+
 
     const infoStyle: CSSProperties = {
         textAlign: 'justify',
@@ -40,19 +48,22 @@ export default function SectionInformation({ information, bulletTitle, bulletPoi
                 {information}
             </div>
             <div style={gridStyle}>
-                {bulletPoints.map((pts, i) => (
-                    <div key={i}>
-                        <h2 style={titleStyle}>{bulletTitle[i]}</h2>
-                        <ul style={listStyle}>
-                            {pts.map((item, ii) => (
-                                <li key={ii} style={{ marginBottom: '0.25rem' }}>
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                {bulletPoints.map((pts, i) => {
+                    return (
+                        <div key={i}>
+                            <h2 style={titleStyle}>{bulletTitle[i]}</h2>
+                            <ul style={listStyle}>
+                                {pts.map((item, ii) =>
+                                    <li key={ii} style={{ marginBottom: '0.25rem', background: ii == highlightIndexes[i] ? "yellow" : "" }}>
+                                        {item}
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     );
 }
+
