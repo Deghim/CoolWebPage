@@ -3,12 +3,13 @@ import SectionInf from "./components/sectionInf";
 import TitleSection from "./components/titleSection";
 
 export default function Carousel() {
+    const titles:string[] = ["information", "experience","projects","socials","\\[a-z]^[A-Z]&\\-d\\"] ;
 
 
     return (
         <section className="flex flex-row w-screen h-screen" style={{ flexWrap: 'wrap' }}>
             <div>
-                <TitleSection title="information" />
+                <TitleSection title={titles[0]} listTitles={titles} />
             </div>
             <div className=" flex-1 overflow-y-auto h-screen" >
                 <SectionInf
@@ -50,8 +51,23 @@ export default function Carousel() {
                         [`ThreadOne - web app for a t-shirt store`,
                             `BeatFinder - web app for music recommendations using spotify's api`,
                             `PacePoint - web app for traffic management`],
-                        ["MAHUNT - android game app", "FastTrack - flutter app for emergency situation for smart traffick lights", "Slate - flutter app for personal task management ","RecipeBook - flutter app for recipes"],
+                        ["MAHUNT - android game app", "FastTrack - flutter app for emergency situation for smart traffick lights", "Slate - flutter app for personal task management ", "RecipeBook - flutter app for recipes"],
                         ["smart traffic light system using ai", "simulation of various fluid equations using python ", "recreation of various data structures in java from zero "],
+                    ]} />
+                <SectionInf
+                    information="Here are my socials"
+                    bulletTitle={["socials"]}
+                    bulletPoints={[
+                        ['youtube','instagram','tiktok','linkedin','github','chess'],
+
+                    ]} />
+                <SectionInf
+                    information="U2FsdGVkX18EP1U5/N3KD7MJw6ItKFTQfjtu5RZg86s=Secret"
+                    bulletTitle={["!##$%$$$%#!","**&^*$%$!@","@!**#%&*$%!"]}
+                    bulletPoints={[ ["!@#$%^&*()", ")(*&^%$#@", "{}|:\"<>?"],
+                         ["~`!@#%^&*(", "_+{}|:\"<>", "?><:{}|+_"],
+                          ["-=[];'./,`", "<>?:\"{}|><", "!@#$$%^&*("],
+                           ["_+|}{\":?><", "`~!@#$%^&", "&*()_+|}{:"]
                     ]} />
             </div>
         </section>
