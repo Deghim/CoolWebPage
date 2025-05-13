@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react"
+import { TypeAnimation } from "react-type-animation";
 import PixelBack from "../pixelBackground/pixelBackground"
 import Carousel from "./carousel";
 // import TheFooter from "./components/footer";
@@ -35,7 +36,10 @@ export default function UserX() {
             }}>
                 <section className=" relative w-full h-screen">
                     <p className="absolute bottom-5 left-5 m-0 font-bold leading-none text-[15vw]">
-                        Jorge U.
+                        <TypeAnimation sequence={[
+                            "Jorge U.", 1000,
+                        ]} />
+
                     </p>
                 </section>
                 <Carousel />
