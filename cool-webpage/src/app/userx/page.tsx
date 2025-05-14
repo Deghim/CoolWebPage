@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { TypeAnimation } from "react-type-animation";
 import PixelBack from "../pixelBackground/pixelBackground"
 import Carousel from "./carousel";
+import TheFooter from "./components/footer";
 // import TheFooter from "./components/footer";
 
 export default function UserX() {
@@ -22,7 +23,6 @@ export default function UserX() {
             }, 1000)
         }, 500)
     }, []);
-
     return (
         <div className=" relative">
             {showAnimation && (
@@ -35,16 +35,20 @@ export default function UserX() {
                 opacity: `${afterShowAnimation ? 1 : 0}`
             }}>
                 <section className=" relative w-full h-screen">
-                    <p className="absolute bottom-5 left-5 m-0 font-bold leading-none text-[15vw]">
-                        <TypeAnimation sequence={[
-                            "Jorge U.", 1000,
-                        ]} />
-
-                    </p>
+                    <TypeAnimation sequence={[
+                        "Jorge U.", 1000,
+                        "Le George.", 1000,
+                        "El Yorch.", 1000,
+                        "...!", 2000,
+                    ]}
+                        className="absolute bottom-5 left-5 m-0 font-bold leading-none text-[15vw]"
+                        wrapper="span"
+                        speed={20}
+                        repeat={Infinity} />
                 </section>
                 <Carousel />
             </div>
-            {/* <TheFooter/> */}
+            <TheFooter />
         </div >
     )
 }
