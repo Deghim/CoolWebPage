@@ -65,6 +65,7 @@ export default function TitleSection({
                 <h1
                     className="text-2xl font-bold"
                     style={{
+                        marginLeft:'1rem',
                         paddingRight: '1rem',
                         position: 'relative',
                         width: 'auto',
@@ -97,7 +98,7 @@ export default function TitleSection({
                     <div
                         key={i}
                         onClick={() => {
-                            onTitleClick && onTitleClick(i);
+                            onTitleClick?.(i);
                         }}
                         style={{
                             cursor: 'pointer',
