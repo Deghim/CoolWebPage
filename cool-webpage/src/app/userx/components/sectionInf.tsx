@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 
 interface SectionInformationProps {
     information: string;
@@ -15,39 +15,24 @@ export default function SectionInformation({
     const [highlightIndexes, setHighlightIndexes] = useState<number[]>([]);
 
     useEffect(() => {
-        setHighlightIndexes(
-            bulletPoints.map(pts =>
-                pts.length > 1
-                    ? Math.floor(Math.random() * pts.length)
-                    : Math.random() > 0.5
-                        ? 0
-                        : -1
-            )
-        );
+        setHighlightIndexes(bulletPoints.map(pts => pts.length > 1 ? Math.floor(Math.random() * pts.length) : Math.random() > 0.5 ? 0 : -1));
     }, [bulletPoints]);
 
-    // 1) Base: always has the pseudo-element, positioning, & transition.
-    const linkBase = [
-        'relative',
-        'pb-1',
-        // pseudo-element setup:
-        "after:content-['']",
-        'after:absolute',
-        'after:left-0',
-        'after:bottom-0',
-        'after:h-[2px]',
-        'after:w-full',
-        'after:bg-current',
-        // 🔑 keep the transition on every state:
-        'after:transition-transform',
-        'after:duration-300',
-    ].join(' ');
+    const underlineBaseStyle: CSSProperties = {
+        display: 'inline',
+        width: 'calc(100%)',
+        backgroundImage: 'linear-gradient(transparent calc(100% - 2px), currentColor 2px)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '0% 100%',
+        transition: 'background-size 0.5s',
+        padding: '0 0 1px 0',
+        boxDecorationBreak: 'clone',
+        WebkitBoxDecorationBreak: 'clone',
+    };
 
-    // 2) When active: full width, grow from left
-    const activeLink = ['after:scale-x-100', 'after:origin-left'].join(' ');
+    const activeStyle = { backgroundSize: '100% 100%', };
 
-    // 3) When inactive: zero width, shrink from right
-    const inactiveLink = ['after:scale-x-0', 'after:origin-right'].join(' ');
+    const inactiveStyle = { backgroundSize: '0% 100%', };
 
     return (
         <div className="h-[90vh]">
@@ -60,14 +45,12 @@ export default function SectionInformation({
                             {pts.map((item, ii) => {
                                 const isActive = ii === highlightIndexes[i];
                                 return (
-                                    <li
-                                        key={ii}
-
-                                    >
-                                        <span className={`${linkBase} ${isActive ? activeLink : inactiveLink
-                                            } mb-1`}
-                                        >
-
+                                    <li key={ii} className="mb-2 relative">
+                                        <span
+                                            style={{
+                                                ...underlineBaseStyle,
+                                                ...(isActive ? activeStyle : inactiveStyle),
+                                            }}>
                                             {item}
                                         </span>
                                     </li>
