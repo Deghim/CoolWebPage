@@ -1,3 +1,6 @@
+'use client';
+import { useEffect, useState, useRef } from "react";
+
 interface TitleSectionProps {
     title: string;
     listTitles: string[];
@@ -11,6 +14,43 @@ export default function TitleSection({
     onTitleClick,
     currentIndex = 0
 }: TitleSectionProps) {
+    const [displayText, setDisplayText] = useState(title);
+    const [mode, setMode] = useState<'deleting' | 'typing'>('typing');
+    const targetTitleRef = useRef(title);
+
+    useEffect(() => {
+        if (title !== targetTitleRef.current) {
+            targetTitleRef.current = title;
+            setMode('deleting');
+        }
+    }, [title]);
+
+    useEffect(() => {
+        let timeoutId: NodeJS.Timeout;
+
+        if (mode === 'deleting') {
+            if (displayText.length === 0) {
+                setMode('typing');
+            } else {
+                timeoutId = setTimeout(() => {
+                    setDisplayText(prev => prev.slice(0, -1));
+                }, 50);
+            }
+        } else if (mode === 'typing') {
+            const targetText = targetTitleRef.current;
+
+            timeoutId = setTimeout(() => {
+                setDisplayText(prev =>
+                    targetText.slice(0, prev.length + 1)
+                );
+            }, 70);
+        }
+
+        return () => {
+            if (timeoutId) clearTimeout(timeoutId);
+        };
+    }, [mode, displayText]);
+
     return (
         <div
             className="relative flex justify-center h-screen"
@@ -22,7 +62,29 @@ export default function TitleSection({
             }}
         >
             <span>
-                <h1 className="text-2xl font-bold">{title}</h1>
+                <h1
+                    className="text-2xl font-bold"
+                    style={{
+                        paddingRight: '1rem',
+                        position: 'relative',
+                        width: 'auto',
+                        whiteSpace: 'nowrap'
+                    }}
+                >
+                    {displayText}
+                    <span
+                        style={{
+                            display: 'inline-block',
+                            width: '3px',
+                            height: '1em',
+                            backgroundColor: 'currentColor',
+                            position: 'relative',
+                            marginLeft: '2px',
+                            verticalAlign: 'middle',
+                            animation: 'blink 1s step-end infinite'
+                        }}
+                    ></span>
+                </h1>
             </span>
             <div
                 className="absolute border"
@@ -31,10 +93,12 @@ export default function TitleSection({
                     left: '1rem',
                 }}
             >
-                {listTitles.map((title, i) => (
+                {listTitles.map((listTitle, i) => (
                     <div
                         key={i}
-                        onClick={() => onTitleClick && onTitleClick(i)}
+                        onClick={() => {
+                            onTitleClick && onTitleClick(i);
+                        }}
                         style={{
                             cursor: 'pointer',
                             color: currentIndex === i ? 'var(--background)' : 'var(--foreground)',
@@ -45,10 +109,17 @@ export default function TitleSection({
                             paddingRight: '0.25rem',
                         }}
                     >
-                        {`[0-0${i}]_${title}`}
+                        {`[0-0${i}]_${listTitle}`}
                     </div>
                 ))}
             </div>
+
+            <style jsx global>{`
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+      `}</style>
         </div>
     );
 }
