@@ -5,12 +5,14 @@ interface SectionInformationProps {
     information: string;
     bulletTitle: string[];
     bulletPoints: string[][];
+    bulletLinks?: (string | undefined)[][];
 }
 
 export default function SectionInformation({
     information,
     bulletTitle,
     bulletPoints,
+    bulletLinks
 }: SectionInformationProps) {
     const [highlightIndexes, setHighlightIndexes] = useState<number[]>([]);
 
@@ -44,22 +46,22 @@ export default function SectionInformation({
                         <ul className="ml-6 list-disc list-inside">
                             {pts.map((item, ii) => {
                                 const isActive = ii === highlightIndexes[i];
+                                const style = { ...underlineBaseStyle, ...(isActive ? activeStyle : inactiveStyle), };
+                                const url = bulletLinks?.[i][ii];
                                 return (
                                     <li key={ii} className="mb-2 relative">
-                                        <span
-                                            style={{
-                                                ...underlineBaseStyle,
-                                                ...(isActive ? activeStyle : inactiveStyle),
-                                            }}>
-                                            {item}
-                                        </span>
+                                        {url ? (
+                                            <a href={url} style={style} target='_blank'>{item}</a>
+                                        ) : (
+                                            <span style={style}>{item}</span>
+                                        )}
                                     </li>
-                                );
+                                )
                             })}
                         </ul>
                     </div>
                 ))}
             </div>
-        </div>
+        </div >
     );
 }
