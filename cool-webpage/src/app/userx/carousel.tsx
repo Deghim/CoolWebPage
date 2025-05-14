@@ -57,37 +57,32 @@ export default function Carousel() {
     const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    if (sectionRefs.current.length !== sectionsData.length) {
-        sectionRefs.current = Array(sectionsData.length).fill(null);
-    }
+    if (sectionRefs.current.length !== sectionsData.length) sectionRefs.current = Array(sectionsData.length).fill(null);
 
-    // Handle manual navigation by clicking on title list
+    const setSectionRef = (el: HTMLDivElement | null, index: number) => {
+        sectionRefs.current[index] = el;
+    };
+
     const handleTitleClick = (index: number) => {
         if (scrollContainerRef.current && sectionRefs.current[index]) {
-            // Set transitioning state to prevent flicker during scroll
             setIsTransitioning(true);
 
-            // Scroll to the section
             sectionRefs.current[index]?.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
 
-            // Update the current section
             setCurrentSection(index);
 
-            // Clear the transitioning state after animation completes
             setTimeout(() => {
                 setIsTransitioning(false);
-            }, 800); // This should match your scroll animation duration
+            }, 800);
         }
     };
 
     useEffect(() => {
-        // Initialize refs array with the correct length
         sectionRefs.current = sectionRefs.current.slice(0, sectionsData.length);
 
-        // Create an Intersection Observer
         const observerOptions = {
             root: scrollContainerRef.current, // The scroll container as the root
             rootMargin: '-10% 0px -50% 0px', // Top margin is small, bottom is larger
@@ -95,10 +90,8 @@ export default function Carousel() {
         };
 
         const observer = new IntersectionObserver((entries) => {
-            // Skip if we're currently in a manual transition
             if (isTransitioning) return;
 
-            // Find the most visible section
             let maxVisibility = 0;
             let mostVisibleIndex = -1;
 
@@ -111,18 +104,15 @@ export default function Carousel() {
                 }
             });
 
-            // Update current section if a clearly visible section was found
             if (mostVisibleIndex !== -1 && maxVisibility > 0.1) {
                 setCurrentSection(mostVisibleIndex);
             }
         }, observerOptions);
 
-        // Observe all section elements
         sectionRefs.current.forEach(ref => {
             if (ref) observer.observe(ref);
         });
 
-        // Clean up the observer when component unmounts
         return () => {
             sectionRefs.current.forEach(ref => {
                 if (ref) observer.unobserve(ref);
@@ -136,8 +126,8 @@ export default function Carousel() {
                 <TitleSection
                     title={titles[currentSection]}
                     listTitles={titles}
-                    onTitleClick={handleTitleClick} // Pass click handler to TitleSection
-                    currentIndex={currentSection}   // Pass current index for styling
+                    onTitleClick={handleTitleClick}
+                    currentIndex={currentSection}
                 />
             </div>
             <div
@@ -145,11 +135,10 @@ export default function Carousel() {
                 className="flex-1 overflow-y-auto h-screen"
                 style={{ scrollBehavior: 'smooth' }}
             >
-                {/* Map through the section data to create each section */}
                 {sectionsData.map((sectionData, index) => (
                     <div
                         key={index}
-                        ref={el => sectionRefs.current[index] = el}
+                        ref={(el) => setSectionRef(el, index)}
                         id={`section-${index}`}
                         className="section-container"
                         style={{
@@ -170,12 +159,3 @@ export default function Carousel() {
         </section>
     );
 }
-
-// Note: The TitleSection component will need to be updated to accept the new props
-// Update your TitleSection component to include:
-// interface TitleSectionProps {
-//   title: string;
-//   listTitles: string[];
-//   onTitleClick?: (index: number) => void;
-//   currentIndex?: number;
-// }
