@@ -3,8 +3,7 @@ import { useEffect, useState } from "react"
 import { TypeAnimation } from "react-type-animation";
 import PixelBack from "../pixelBackground/pixelBackground"
 import Carousel from "./carousel";
-import TheFooter from "./components/footer";
-// import TheFooter from "./components/footer";
+import TheFooter from "../components/footer";
 
 export default function UserX() {
     const [showAnimation, setShowAnimation] = useState(true);
@@ -48,7 +47,9 @@ export default function UserX() {
                 </section>
                 <Carousel />
             </div>
+
             <TheFooter />
+
         </div >
     )
 }
