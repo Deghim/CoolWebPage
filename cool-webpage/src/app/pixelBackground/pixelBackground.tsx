@@ -1,6 +1,7 @@
 'use client';
 import { CSSProperties, useEffect, useState, JSX } from "react";
 import { motion } from 'framer-motion';
+import React from "react";
 
 const anim = {
     initial: { opacity: 1 },
@@ -16,7 +17,7 @@ function shuffleArray<T>(array: T[]): T[] {
     return array;
 }
 
-export default function PixelBack({ gatillo }: { gatillo: boolean }) {
+function PixelBack({ gatillo }: { gatillo: boolean }) {
     const [blocks, setBlocks] = useState<JSX.Element[][]>([]);
 
     useEffect(() => {
@@ -78,3 +79,5 @@ export default function PixelBack({ gatillo }: { gatillo: boolean }) {
         </div>
     );
 }
+
+export default React.memo(PixelBack)

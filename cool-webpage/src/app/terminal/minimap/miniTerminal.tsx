@@ -1,8 +1,9 @@
 "use client";
 
+import React from "react";
 import { CSSProperties } from "react";
 
-export default function MiniTerm({ content }: { content: string[] }) {
+function MiniTerm({ content }: { content: string[] }) {
     const font: CSSProperties = {
         fontSize: '4px'
 
@@ -19,3 +20,5 @@ export default function MiniTerm({ content }: { content: string[] }) {
         </div>
     );
 }
+
+export default React.memo(MiniTerm);
