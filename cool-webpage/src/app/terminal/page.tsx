@@ -1,12 +1,12 @@
 'use client';
-import { useState, useEffect, useRef, KeyboardEvent } from "react";
+import { useState, useEffect, useRef, KeyboardEvent, useMemo } from "react";
 import PixelBack from "../pixelBackground/pixelBackground";
 import { useRouter } from "next/navigation";
 
 import MiniTerm from "./minimap/miniTerminal";
 
 export default function Terminal() {
-    const date: Date = new Date()
+    const date: Date = useMemo(() => new Date(), []);
     const router = useRouter()
     const [showAnimation, setShowAnimation] = useState(true);
     const [afterShowAnimation, setAfterShowAnimation] = useState(false)
@@ -30,15 +30,16 @@ export default function Terminal() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        setTimeout(() => {
-            setAfterShowAnimation(true)
-        }, 250)
-        setTimeout(() => {
+        const timeOut1 = setTimeout(() => setAfterShowAnimation(true), 250)
+        const timeOut2 = setTimeout(() => {
             setGatillo(!gatillo);
-            setTimeout(() => {
-                setShowAnimation(false);
-            }, 1000);
+            const timeOut3 = setTimeout(() => setShowAnimation(false), 1000);
+            return () => clearTimeout(timeOut3);
         }, 500);
+        return () => {
+            clearTimeout(timeOut1)
+            clearTimeout(timeOut2)
+        };
     }, []);
 
     const commands: Record<string, { description: string, action: () => void }> = {
