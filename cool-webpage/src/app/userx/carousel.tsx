@@ -7,7 +7,7 @@ export default function Carousel() {
     const titles: string[] = ["information", "experience", "projects", "socials", "\\[a-z]^[A-Z]&\\-d\\"];
     const sectionsData = [
         {
-            information: "Developer who's been known to accidentally start projects in HTML before realizing I still need CSS to make them look pretty. In short, I'm always learning, occasionally debugging in my dreams, and forever grateful that semicolons sometimes matter in code, not sentences. Let's build something fun (and functional) together!",
+            information: "Developer who's been known to accidentally start projects in HTML before realizing I still need CSS to make them look pretty. In short, I'm always learning, occasionally debugging in my dreams, and forever grateful that semicolons sometimes matter in code, not sentences",
             bulletTitle: ["tech", "languages", "interests"],
             bulletPoints: [
                 ["html, css & javascript", "java", "python", "mongodb", "sql", "UNIX based systems", "flutter/dart", "arduino", "react.js", "laravel", "typescript"],
@@ -36,13 +36,12 @@ export default function Carousel() {
             information: "Here are my socials",
             bulletTitle: ["socials"],
             bulletPoints: [
-                ['youtube', 'instagram', 'tiktok', 'linkedin', 'github', 'chess'],
+                ['youtube', 'instagram', 'linkedin', 'github', 'chess'],
             ],
             bulletLinks: [
                 [
                     "http://www.youtube.com/@jorge_u.",
                     "https://www.instagram.com/yorchprofe?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
-                    "https://www.tiktok.com/@jorge_u._?is_from_webapp=1&sender_device=pc",
                     "https://www.linkedin.com/in/jorge-u-94b85434a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BERDmXUkKSra%2F5WdKE5NKQw%3D%3D",
                     "https://github.com/Deghim",
                     "https://www.chess.com/member/deghim"

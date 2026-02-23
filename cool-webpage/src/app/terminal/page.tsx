@@ -74,8 +74,9 @@ export default function Terminal() {
                 const whoLines: string[] = [
                     "Jorge Chavira - Software Developer",
                     "-----------------------------------",
-                    "A passionate developer focused on creating interactive web experiences.",
-                    "Skills include React, Next.js, and creative front-end development."]
+                    "Developer who somehow manages to spin up entire projects in React before realizing I forgot to style a single button.",
+                    "In short, I love building web experiences, occasionally debug in my sleep, and I'm forever thankful that semicolons only crash code—not conversations."
+                  ];                  
                 setOutput(prev => [...prev, ...whoLines]);
                 setTerminalContent(prev => [...prev, ...whoLines]);
             }
@@ -177,7 +178,6 @@ export default function Terminal() {
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             executeCommand(input);
-            // setAllhistory(prev => [...prev, input])
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
             if (commandHistory.length > 0) {
