@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cool WebPage",
+  title: "Jorge Chavira Dev",
 };
 
 export default function RootLayout({
