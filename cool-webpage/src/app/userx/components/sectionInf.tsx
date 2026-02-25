@@ -39,8 +39,8 @@ export default function SectionInformation({
     return (
         // <div className="h-screen pt-19 pr-5 overflow-auto snap-y snap-mandatory scroll-smooth">
         <div className="h-screen pt-19 pr-5 overflow-auto">
-            <div className="text-justify ">{information}</div>
-            <div className={`grid p-4 auto-rows-auto grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]`}>
+            <div className="text-justify break-words">{information}</div>
+            <div className={`grid auto-rows-auto grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]`}>
                 {bulletPoints.map((pts, i) => (
                     <div key={i}>
                         <h2 className=" mt-8 mb-2 text-lg font-bold">{bulletTitle[i]}</h2>
