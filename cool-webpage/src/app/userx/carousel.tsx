@@ -141,14 +141,17 @@ export default function Carousel() {
             </div>
             <div
                 ref={scrollContainerRef}
-                className="flex-1 overflow-y-auto h-screen scroll-smooth"
+                // className="flex-1 overflow-y-auto h-screen scroll-smooth"
+                className="flex-1 h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth overscroll-contain"
             >
                 {sectionsData.map((sectionData, index) => (
                     <div
                         key={index}
                         ref={(el) => setSectionRef(el, index)}
                         id={`section-${index}`}
-                        className="section-container transition-colors duration-300 ease-in-out"
+                        // className="section-container transition-colors duration-300 ease-in-out"
+                        className="section-container h-screen snap-start transition-colors duration-300 ease-in-out"
+
                     >
                         <SectionInf
                             information={sectionData.information}
