@@ -3,7 +3,7 @@
 import { TypeAnimation } from "react-type-animation";
 // import PixelBack from "../pixelBackground/pixelBackground"
 import Carousel from "./carousel";
-import TheFooter from "../components/footer";
+// import TheFooter from "../components/footer";
 
 export default function UserX() {
     // const [showAnimation, setShowAnimation] = useState(true);
@@ -23,18 +23,8 @@ export default function UserX() {
     //     }, 500)
     // }, []);
     return (
-        <div className=" relative">
-            {/* {showAnimation && (
-                <div className=" fixed inset-0 z-10">
-                    <PixelBack gatillo={!gatillo} />
-
-                </div>
-            )}
-            <div style={{
-                opacity: `${afterShowAnimation ? 1 : 0}`
-            }}>
-            </div> */}
-            <section className=" relative w-full h-screen">
+        <div className="h-screen snap-y snap-mandatory overflow-scroll scroll-smooth">
+            <section className=" relative w-full h-screen snap-start">
                 <TypeAnimation sequence={[
                     "Jorge U.", 1000,
                     "Le George.", 1000,
@@ -46,9 +36,11 @@ export default function UserX() {
                     speed={20}
                     repeat={Infinity} />
             </section>
-            <Carousel />
+            <section className="h-screen snap-start">
+                <Carousel />
+            </section>
 
-            <TheFooter />
+            {/* <TheFooter /> */}
 
         </div >
     )
