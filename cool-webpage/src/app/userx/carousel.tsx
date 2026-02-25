@@ -7,7 +7,7 @@ export default function Carousel() {
     const titles: string[] = ["information", "experience", "projects", "socials", "\\[a-z]&\\-d\\"];
     const sectionsData = [
         {
-            information: "Developer who's been known to accidentally start projects in HTML before realizing I still need CSS to make them look pretty. In short, I'm always learning, occasionally debugging in my dreams, and forever grateful that semicolons sometimes matter in code, not sentences",
+            information: "Developer who's been known to accidentally start projects in HTML before realizing I still need CSS to make them look pretty. In short, I'm always learning, occasionally debugging in my dreams, and forever grateful that semicolons sometimes matter in code, not sentences.",
             bulletTitle: ["tech", "languages", "interests"],
             bulletPoints: [
                 ["html, css & javascript", "typescript", "java", "python", "mongodb & sql", "UNIX based systems", "flutter/dart", "arduino", "react.js", "laravel"],
@@ -34,7 +34,7 @@ export default function Carousel() {
             ]
         },
         {
-            information: `…And at the end of the day, whether I'm spinning up servers, marshaling mobile widgets, or wrangling algorithms, I'm always chasing that satisfying "it just works" moment`,
+            information: `…And at the end of the day, whether I'm spinning up servers, marshaling mobile widgets, or wrangling algorithms, I'm always chasing that satisfying "it just works" moment.`,
             bulletTitle: ["web", "mobile", "other"],
             bulletPoints: [
                 [`ThreadOne - web app for a t-shirt store`, `BeatFinder - web app for music recommendations using spotify's api`, `PacePoint - web app for traffic management`],
