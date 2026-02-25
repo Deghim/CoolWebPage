@@ -10,17 +10,27 @@ export default function Carousel() {
             information: "Developer who's been known to accidentally start projects in HTML before realizing I still need CSS to make them look pretty. In short, I'm always learning, occasionally debugging in my dreams, and forever grateful that semicolons sometimes matter in code, not sentences",
             bulletTitle: ["tech", "languages", "interests"],
             bulletPoints: [
-                ["html, css & javascript", "java", "python", "mongodb", "sql", "UNIX based systems", "flutter/dart", "arduino", "react.js", "laravel", "typescript"],
-                ["english", "spanish", "french"],
+                ["html, css & javascript", "typescript", "java", "python", "mongodb & sql", "UNIX based systems", "flutter/dart", "arduino", "react.js", "laravel"],
+                ["spanish [Native]", "english [C1]", "french [B1]"],
                 ["technology", "innovation", "music", "coffee & tea", "sports"],
             ]
         },
         {
             information: `I taught eager young minds how to conquer fractions and algebra… and discovered that "x" can be a notoriously shy character.  I sat shoulder-to-keyboard with seasoned developers, picked up best practices, and learned that "it works on my machine" is my moto.`,
-            bulletTitle: ["first job", "second job"],
+            bulletTitle: ["Web developer intern - 4040APPS", "Assistant instructor - Kumon"],
             bulletPoints: [
-                ["math tutor at kumon"],
-                ["software developer intern at 4040Apps"],
+                [
+                    "Developed, maintained, and refactored large React modules and dashboards for a field-operations platform tracking utilities and property-tax expenses.",
+                    "Integrated REST APIs (fetch) to render operational and financial data across multiple dashboard components, improving consistency and reliability of data display.",
+                    "Enhanced Google Maps API views to support multiple data layers and improve map usability for operational workflows.",
+                    "Streamlined the UI flow for PDF requests to support backend generation and reduce user steps in common tasks.",
+                    "Collaborated through Git/GitHub with pull requests and code reviews; supported releases with structured manual testing and iterative fixes.",
+                ],
+
+                [
+                    "Delivered 1:1 instruction in math and reading (~5 students/day), adapting learning plans and pacing to improve outcomes.",
+                    "Diagnosed recurring errors, reinforced problem-solving strategies, and tracked progress using detailed performance reports.",
+                ],
             ]
         },
         {
@@ -142,7 +152,7 @@ export default function Carousel() {
             <div
                 ref={scrollContainerRef}
                 // className="flex-1 overflow-y-auto h-screen scroll-smooth"
-                className="flex-1 h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth overscroll-contain"
+                className="flex-1 h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth overscroll-auto"
             >
                 {sectionsData.map((sectionData, index) => (
                     <div
