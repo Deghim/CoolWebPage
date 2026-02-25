@@ -37,13 +37,14 @@ export default function SectionInformation({
     const inactiveStyle = { backgroundSize: '0% 100%', };
 
     return (
-        <div className="h-[90vh]">
-            <div className="prose max-w-none mt-24 pr-20">{information}</div>
-            <div className="grid gap-4 p-4 auto-rows-auto grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
+        // <div className="h-screen pt-19 pr-5 overflow-auto snap-y snap-mandatory scroll-smooth">
+        <div className="h-screen pt-19 pr-5 overflow-auto">
+            <div className="text-justify ">{information}</div>
+            <div className={`grid p-4 auto-rows-auto grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]`}>
                 {bulletPoints.map((pts, i) => (
                     <div key={i}>
-                        <h2 className="mt-8 mb-8 text-lg font-bold">{bulletTitle[i]}</h2>
-                        <ul className="ml-6 list-disc list-inside">
+                        <h2 className=" mt-8 mb-2 text-lg font-bold">{bulletTitle[i]}</h2>
+                        <ul className="ml-3 list-disc list-inside">
                             {pts.map((item, ii) => {
                                 const isActive = ii === highlightIndexes[i];
                                 const style = { ...underlineBaseStyle, ...(isActive ? activeStyle : inactiveStyle), };

@@ -53,62 +53,31 @@ export default function TitleSection({
 
     return (
         <div
-            className="relative flex justify-center h-screen"
-            style={{
-                width: '20vw',
-                minWidth: '200px',
-                maxWidth: '400px',
-                padding: "100px",
-            }}
+            className="relative flex justify-center h-screen w-[200px] pt-20"
         >
             <span>
                 <h1
                     className="text-2xl font-bold"
-                    style={{
-                        marginLeft:'1rem',
-                        paddingRight: '1rem',
-                        position: 'relative',
-                        width: 'auto',
-                        whiteSpace: 'nowrap'
-                    }}
                 >
                     {displayText}
                     <span
-                        style={{
-                            display: 'inline-block',
-                            width: '3px',
-                            height: '1em',
-                            backgroundColor: 'currentColor',
-                            position: 'relative',
-                            marginLeft: '2px',
-                            verticalAlign: 'middle',
-                            animation: 'blink 1s step-end infinite'
-                        }}
-                    ></span>
+                        className="inline-block w-[3px] h-[1em] bg-current relative ml-[2px] align-middle animate-[blink_1s_step-end_infinite]"
+                    />
                 </h1>
             </span>
             <div
-                className="absolute border"
-                style={{
-                    bottom: '100px',
-                    left: '1rem',
-                }}
+                className="absolute border bottom-25 w-40"
             >
                 {listTitles.map((listTitle, i) => (
                     <div
                         key={i}
-                        onClick={() => {
-                            onTitleClick?.(i);
-                        }}
-                        style={{
-                            cursor: 'pointer',
-                            color: currentIndex === i ? 'var(--background)' : 'var(--foreground)',
-                            background: currentIndex === i ? 'var(--foreground)' : '',
-                            transition: 'all 0.3s ease',
-                            padding: '0.25rem 0',
-                            paddingLeft: '0.25rem',
-                            paddingRight: '0.25rem',
-                        }}
+                        onClick={() => onTitleClick?.(i)}
+                        className={
+                            `cursor-pointer p-1 transition-all duration-300 ` +
+                            (currentIndex === i
+                                ? `text-[color:var(--background)] bg-[color:var(--foreground)] font-bold`
+                                : `text-[color:var(--foreground)] bg-transparent`)
+                        }
                     >
                         {`[0-0${i}]_${listTitle}`}
                     </div>

@@ -4,7 +4,7 @@ import SectionInf from "./components/sectionInf";
 import TitleSection from "./components/titleSection";
 
 export default function Carousel() {
-    const titles: string[] = ["information", "experience", "projects", "socials", "\\[a-z]^[A-Z]&\\-d\\"];
+    const titles: string[] = ["information", "experience", "projects", "socials", "\\[a-z]&\\-d\\"];
     const sectionsData = [
         {
             information: "Developer who's been known to accidentally start projects in HTML before realizing I still need CSS to make them look pretty. In short, I'm always learning, occasionally debugging in my dreams, and forever grateful that semicolons sometimes matter in code, not sentences",
@@ -42,7 +42,7 @@ export default function Carousel() {
                 [
                     "http://www.youtube.com/@jorge_u.",
                     "https://www.instagram.com/yorchprofe?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
-                    "https://www.linkedin.com/in/jorge-u-94b85434a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BERDmXUkKSra%2F5WdKE5NKQw%3D%3D",
+                    "https://www.linkedin.com/in/jorge-chavira-94b85434a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEiivoMheQsKdhsXx7Zgoaw%3D%3D",
                     "https://github.com/Deghim",
                     "https://www.chess.com/member/deghim"
                 ]
@@ -130,7 +130,7 @@ export default function Carousel() {
     }, [isTransitioning, sectionsData.length]);
 
     return (
-        <section className="flex flex-row w-screen h-screen" style={{ flexWrap: 'wrap' }}>
+        <section className="flex flex-row flex-wrap w-screen h-screen" >
             <div>
                 <TitleSection
                     title={titles[currentSection]}
@@ -141,21 +141,14 @@ export default function Carousel() {
             </div>
             <div
                 ref={scrollContainerRef}
-                className="flex-1 overflow-y-auto h-screen"
-                style={{ scrollBehavior: 'smooth' }}
+                className="flex-1 overflow-y-auto h-screen scroll-smooth"
             >
                 {sectionsData.map((sectionData, index) => (
                     <div
                         key={index}
                         ref={(el) => setSectionRef(el, index)}
                         id={`section-${index}`}
-                        className="section-container"
-                        style={{
-                            minHeight: '90vh',
-                            paddingTop: '2rem',
-                            paddingBottom: '2rem',
-                            transition: 'border-color 0.3s ease'
-                        }}
+                        className="section-container transition-colors duration-300 ease-in-out"
                     >
                         <SectionInf
                             information={sectionData.information}
